@@ -7,6 +7,11 @@
 #include <ncurses.h>
 #include "EasyPIO.h"
 
+extern void delay_asm(int time);
+extern void menu_asm(void);
+extern void formula1(void);
+extern void colision_asm(void);
+
 void disp_binary(int);
 void delay(int);
 void autofantastico();
@@ -360,10 +365,10 @@ void menu()
          choque();
          break;
       case 3:
-         f1();
+         formula1();
          break;
       case 4:
-         colision();
+         colision_asm();
          break;
       case 5:
          printf("Saliendo del programa...\n");
