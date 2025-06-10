@@ -37,28 +37,20 @@ void leds(int i)
       indice++;
    }
 }
-/**
- * @brief Maneja la entrada del teclado para las animaciones.
- * * @param on_time Puntero a la variable de velocidad de la animación.
- * @param step La cantidad a sumar o restar de on_time.
- * @param min_time El valor mínimo para on_time.
- * @param max_time El valor máximo para on_time.
- * @return true si el usuario presionó 'q' (indica que hay que salir).
- * @return false si la animación debe continuar.
- */
+
 bool manejar_teclado(int *on_time, int step, int min_time, int max_time)
 {
-    int c = getch(); // Lee una tecla
+    int c = getch();
 
     if (c == 'q')
     {
         endwin();
         system("clear");
-        return true; // Sí, hay que salir
+        return true;
     }
     else if (c == KEY_UP)
     {
-        *on_time -= step; // Modifica el valor a través del puntero
+        *on_time -= step;
         if (*on_time < min_time)
         {
             *on_time = min_time;
@@ -66,15 +58,16 @@ bool manejar_teclado(int *on_time, int step, int min_time, int max_time)
     }
     else if (c == KEY_DOWN)
     {
-        *on_time += step; // Modifica el valor a través del puntero
+        *on_time += step;
         if (*on_time > max_time)
         {
             *on_time = max_time;
         }
     }
 
-    return false; // No, no hay que salir
+    return false;
 }
+
 void disp_binary(int i)
 {
    int t;
