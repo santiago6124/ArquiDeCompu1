@@ -37,7 +37,44 @@ void leds(int i)
       indice++;
    }
 }
+/**
+ * @brief Maneja la entrada del teclado para las animaciones.
+ * * @param on_time Puntero a la variable de velocidad de la animación.
+ * @param step La cantidad a sumar o restar de on_time.
+ * @param min_time El valor mínimo para on_time.
+ * @param max_time El valor máximo para on_time.
+ * @return true si el usuario presionó 'q' (indica que hay que salir).
+ * @return false si la animación debe continuar.
+ */
+bool manejar_teclado(int *on_time, int step, int min_time, int max_time)
+{
+    int c = getch(); // Lee una tecla
 
+    if (c == 'q')
+    {
+        endwin();
+        system("clear");
+        return true; // Sí, hay que salir
+    }
+    else if (c == KEY_UP)
+    {
+        *on_time -= step; // Modifica el valor a través del puntero
+        if (*on_time < min_time)
+        {
+            *on_time = min_time;
+        }
+    }
+    else if (c == KEY_DOWN)
+    {
+        *on_time += step; // Modifica el valor a través del puntero
+        if (*on_time > max_time)
+        {
+            *on_time = max_time;
+        }
+    }
+
+    return false; // No, no hay que salir
+}
 void disp_binary(int i)
 {
    int t;
@@ -77,7 +114,6 @@ void readPassword(char *password, int maxLength)
 void autofantastico()
 {
    unsigned char output;
-   char t;
    int on_time = 200;
    int min_time = 20;
    int max_time = 500;
@@ -101,28 +137,9 @@ void autofantastico()
          output = output >> 1;
          printf("\033[A\r");
 
-         int c = getch();
-         if (c == 'q')
+         if (manejar_teclado(&on_time, 20, min_time, max_time))
          {
-            endwin();
-            system("clear");
             return;
-         }
-         else if (c == KEY_UP)
-         {
-            on_time -= 20;
-            if (on_time < min_time)
-            {
-               on_time = min_time;
-            }
-         }
-         else if (c == KEY_DOWN)
-         {
-            on_time += 20;
-            if (on_time > max_time)
-            {
-               on_time = max_time;
-            }
          }
       }
 
@@ -135,32 +152,12 @@ void autofantastico()
          delay(on_time);
          printf("\033[A\r");
 
-         int c = getch();
-         if (c == 'q')
+         if (manejar_teclado(&on_time, 20, min_time, max_time))
          {
-            endwin();
-            system("clear");
             return;
-         }
-         else if (c == KEY_UP)
-         {
-            on_time -= 20;
-            if (on_time < min_time)
-            {
-               on_time = min_time;
-            }
-         }
-         else if (c == KEY_DOWN)
-         {
-            on_time += 20;
-            if (on_time > max_time)
-            {
-               on_time = max_time;
-            }
          }
       }
    }
-   endwin();
 }
 
 void choque()
@@ -189,33 +186,12 @@ void choque()
          delay(on_time);
          printf("\033[A\r");
 
-         int c = getch();
-         if (c == 'q')
+         if (manejar_teclado(&on_time, 20, min_time, max_time))
          {
-            endwin();
-            system("clear");
             return;
-         }
-         else if (c == KEY_UP)
-         {
-            on_time -= 20;
-            if (on_time < min_time)
-            {
-               on_time = min_time;
-            }
-         }
-         else if (c == KEY_DOWN)
-         {
-            on_time += 20;
-            if (on_time > max_time)
-            {
-               on_time = max_time;
-            }
          }
       }
    }
-
-   endwin();
 }
 
 void f1()
@@ -240,31 +216,12 @@ void f1()
       {
          disp_binary(output);
          delay(on_time);
-         output = output + (output / i); /* Le suma el bit de la derecha */
+         output = output + (output / i);
          printf("\033[A\r");
 
-         int c = getch();
-         if (c == 'q')
+         if (manejar_teclado(&on_time, 100, min_time, max_time))
          {
-            endwin();
-            system("clear");
             return;
-         }
-         else if (c == KEY_UP)
-         {
-            on_time -= 100;
-            if (on_time < min_time)
-            {
-               on_time = min_time;
-            }
-         }
-         else if (c == KEY_DOWN)
-         {
-            on_time += 100;
-            if (on_time > max_time)
-            {
-               on_time = max_time;
-            }
          }
       }
       output = 0x00;
@@ -272,7 +229,6 @@ void f1()
       delay(on_time);
       printf("\033[A\r");
    }
-   endwin();
 }
 
 void colision()
@@ -283,7 +239,6 @@ void colision()
    int max_time = 500;
 
    unsigned char patrones[] = {0x81,0xC3,0xE7,0xFF,0xE7,0xC3,0x81,0x00};
-
    int num_pasos = sizeof(patrones) / sizeof(patrones[0]);
 
    initscr();
@@ -299,37 +254,16 @@ void colision()
       for (int i = 0; i < num_pasos; i++)
       {
          output = patrones[i];
-
          disp_binary(output);
          delay(on_time);
          printf("\033[A\r");
 
-         int c = getch();
-         if (c == 'q')
+         if (manejar_teclado(&on_time, 20, min_time, max_time))
          {
-            endwin();
-            system("clear");
             return;
-         }
-         else if (c == KEY_UP)
-         {
-            on_time -= 20;
-            if (on_time < min_time)
-            {
-               on_time = min_time;
-            }
-         }
-         else if (c == KEY_DOWN)
-         {
-            on_time += 20;
-            if (on_time > max_time)
-            {
-               on_time = max_time;
-            }
          }
       }
    }
-   endwin();
 }
 
 void menu()
