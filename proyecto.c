@@ -80,12 +80,12 @@ void autofantastico()
    int max_time = 500;
 
    initscr();
-   keypad(stdscr, TRUE);  
-   nodelay(stdscr, TRUE); 
-   noecho();              
+   keypad(stdscr, TRUE);
+   nodelay(stdscr, TRUE);
+   noecho();
 
    mvprintw(0, 0, "Has elegido la Función de Auto Fantástico:\n\n(Para salir pulsa la tecla 'q'. Para cambiar la velocidad, con las flechas))\n\n");
-   refresh(); 
+   refresh();
 
    while (1)
    {
@@ -94,20 +94,20 @@ void autofantastico()
       for (int i = 0; i < 8; i++)
       {
          disp_binary(output);
-         delay(on_time);     
-         output = output >> 1; 
-         printf("\033[A\r");  
+         delay(on_time);
+         output = output >> 1;
+         printf("\033[A\r");
 
          int c = getch();
          if (c == 'q')
          {
-            endwin();        
+            endwin();
             system("clear");
             return;
          }
          else if (c == KEY_UP)
          {
-            on_time -= 20; 
+            on_time -= 20;
             if (on_time < min_time)
             {
                on_time = min_time;
@@ -135,24 +135,24 @@ void autofantastico()
          int c = getch();
          if (c == 'q')
          {
-            endwin();        
+            endwin();
             system("clear");
             return;
          }
          else if (c == KEY_UP)
          {
-            on_time -= 20; 
+            on_time -= 20;
             if (on_time < min_time)
             {
-               on_time = min_time; 
+               on_time = min_time;
             }
          }
          else if (c == KEY_DOWN)
          {
-            on_time += 20; 
+            on_time += 20;
             if (on_time > max_time)
             {
-               on_time = max_time; 
+               on_time = max_time;
             }
          }
       }
@@ -163,19 +163,19 @@ void autofantastico()
 void choque()
 {
    unsigned char output;
-   int on_time = 200;  
+   int on_time = 200;
    int min_time = 20;
    int max_time = 500;
 
    unsigned char patrones[] = {0x81, 0x42, 0x24, 0x18, 0x24, 0x42, 0x81};
 
-   initscr();             // Inicializar la biblioteca ncurses
-   keypad(stdscr, TRUE);  // Habilitar el reconocimiento de teclas especiales, incluyendo las flechas
-   nodelay(stdscr, TRUE); // Habilitar el modo de entrada de teclado no bloqueante
-   noecho();              // Desactivar la impresión automática de los caracteres ingresados
+   initscr();
+   keypad(stdscr, TRUE);
+   nodelay(stdscr, TRUE);
+   noecho();
 
    mvprintw(0, 0, "Has elegido la Función del Choque:\n\n(Para salir pulsa la tecla 'q'. Para cambiar la velocidad, con las flechas)\n\n");
-   refresh(); // Actualizar la pantalla
+   refresh();
 
    while (1)
    {
@@ -184,51 +184,51 @@ void choque()
          output = patrones[i];
          disp_binary(output);
          delay(on_time);
-         printf("\033[A\r"); // Mover el cursor a la línea anterior y al inicio
+         printf("\033[A\r");
 
-         // Verificar si se ha presionado la tecla 'q', KEY_UP o KEY_DOWN
          int c = getch();
          if (c == 'q')
          {
-            endwin();        // Finalizar el modo ncurses
-            system("clear"); // Borrar la pantalla
+            endwin();
+            system("clear");
             return;
          }
          else if (c == KEY_UP)
          {
-            on_time -= 20; // Subir la velocidad en 20 milisegundos
+            on_time -= 20;
             if (on_time < min_time)
             {
-               on_time = min_time; // Asegurarse de que la velocidad no sea menor que el límite mínimo
+               on_time = min_time;
             }
          }
          else if (c == KEY_DOWN)
          {
-            on_time += 20; // Bajar la velocidad en 20 milisegundos
+            on_time += 20;
             if (on_time > max_time)
             {
-               on_time = max_time; // Asegurarse de que la velocidad no sea mayor que el límite máximo
+               on_time = max_time;
             }
          }
       }
    }
 
-   endwin(); // Finalizar el modo ncurses
+   endwin();
 }
+
 void f1()
 {
    unsigned char output;
-   int on_time = 500;   /* set holding time */
-   int min_time = 200;  // Límite mínimo de tiempo
-   int max_time = 1000; // Límite máximo de tiempo
+   int on_time = 500;
+   int min_time = 200;
+   int max_time = 1000;
 
-   initscr();             // Inicializar la biblioteca ncurses
-   keypad(stdscr, TRUE);  // Habilitar el reconocimiento de teclas especiales, incluyendo las flechas
-   nodelay(stdscr, TRUE); // Habilitar el modo de entrada de teclado no bloqueante
-   noecho();              // Desactivar la impresión automática de los caracteres ingresados
+   initscr();
+   keypad(stdscr, TRUE);
+   nodelay(stdscr, TRUE);
+   noecho();
 
    mvprintw(0, 0, "Has elegido la Función de Fórmula 1:\n\n(Para salir pulsa la tecla 'q')\n\n");
-   refresh(); // Actualizar la pantalla
+   refresh();
 
    while (1)
    {
@@ -236,123 +236,93 @@ void f1()
       for (int i = 2; i < 512; i = (i * 2) + 2)
       {
          disp_binary(output);
-         delay(on_time);                 /* Esperar un tiempo */
+         delay(on_time);
          output = output + (output / i); /* Le suma el bit de la derecha */
-         printf("\033[A\r");             // Mover el cursor a la línea anterior y al inicio
-         // Verificar si se ha presionado la tecla 'q', KEY_UP o KEY_DOWN
+         printf("\033[A\r");
+
          int c = getch();
          if (c == 'q')
          {
-            endwin();        // Finalizar el modo ncurses
-            system("clear"); // Borrar la pantalla
+            endwin();
+            system("clear");
             return;
          }
          else if (c == KEY_UP)
          {
-            on_time -= 100; // Subir la velocidad en 100 milisegundos
+            on_time -= 100;
             if (on_time < min_time)
             {
-               on_time = min_time; // Asegurarse de que la velocidad no sea menor que el límite mínimo
+               on_time = min_time;
             }
          }
          else if (c == KEY_DOWN)
          {
-            on_time += 100; // Bajar la velocidad en 100 milisegundos
+            on_time += 100;
             if (on_time > max_time)
             {
-               on_time = max_time; // Asegurarse de que la velocidad no sea mayor que el límite máximo
+               on_time = max_time;
             }
          }
       }
       output = 0x00;
       disp_binary(output);
       delay(on_time);
-      printf("\033[A\r"); // Mover el cursor a la línea anterior y al inicio
+      printf("\033[A\r");
    }
-   endwin(); // Finalizar el modo ncurses
+   endwin();
 }
 
 void colision()
 {
    unsigned char output;
-   int on_time = 200;  /* set holding time */
-   int min_time = 20;  // Límite mínimo de tiempo
-   int max_time = 500; // Límite máximo de tiempo
+   int on_time = 200;
+   int min_time = 20;
+   int max_time = 500;
 
-   initscr();             // Inicializar la biblioteca ncurses
-   keypad(stdscr, TRUE);  // Habilitar el reconocimiento de teclas especiales
-   nodelay(stdscr, TRUE); // Habilitar el modo de entrada de teclado no bloqueante
-   noecho();              // Desactivar la impresión automática de los caracteres ingresados
+   unsigned char patrones[] = {0x81,0xC3,0xE7,0xFF,0xE7,0xC3,0x81,0x00};
+
+   int num_pasos = sizeof(patrones) / sizeof(patrones[0]);
+
+   initscr();
+   keypad(stdscr, TRUE);
+   nodelay(stdscr, TRUE);
+   noecho();
 
    mvprintw(0, 0, "Has elegido la Función de Colisión al Centro:\n\n(Para salir pulsa la tecla 'q'. Para cambiar la velocidad, con las flechas)\n\n");
-   refresh(); // Actualizar la pantalla
+   refresh();
 
    while (1)
    {
-      // Stack to center
-      output = 0x81;
-      disp_binary(output);
-      delay(on_time);
-      printf("\033[A\r");
-
-      output = 0xC3;
-      disp_binary(output);
-      delay(on_time);
-      printf("\033[A\r");
-
-      output = 0xE7;
-      disp_binary(output);
-      delay(on_time);
-      printf("\033[A\r");
-
-      output = 0xFF;
-      disp_binary(output);
-      delay(on_time);
-      printf("\033[A\r");
-
-      // Wipe out from center
-      output = 0xE7;
-      disp_binary(output);
-      delay(on_time);
-      printf("\033[A\r");
-
-      output = 0xC3;
-      disp_binary(output);
-      delay(on_time);
-      printf("\033[A\r");
-
-      output = 0x81;
-      disp_binary(output);
-      delay(on_time);
-      printf("\033[A\r");
-
-      output = 0x00;
-      disp_binary(output);
-      delay(on_time);
-      printf("\033[A\r");
-
-      // Check for key press
-      int c = getch();
-      if (c == 'q')
+      for (int i = 0; i < num_pasos; i++)
       {
-         endwin();
-         system("clear");
-         return;
-      }
-      else if (c == KEY_UP)
-      {
-         on_time -= 20;
-         if (on_time < min_time)
+         output = patrones[i];
+
+         disp_binary(output);
+         delay(on_time);
+         printf("\033[A\r");
+
+         int c = getch();
+         if (c == 'q')
          {
-            on_time = min_time;
+            endwin();
+            system("clear");
+            return;
          }
-      }
-      else if (c == KEY_DOWN)
-      {
-         on_time += 20;
-         if (on_time > max_time)
+         else if (c == KEY_UP)
          {
-            on_time = max_time;
+            on_time -= 20;
+            if (on_time < min_time)
+            {
+               on_time = min_time;
+            }
+         }
+         else if (c == KEY_DOWN)
+         {
+            on_time += 20;
+            if (on_time > max_time)
+            {
+               on_time = max_time;
+            }
          }
       }
    }
@@ -376,7 +346,8 @@ void menu()
       if (scanf("%d", &opcion) != 1)
       {
          printf("Opcion no valida\n");
-         while (getchar() != '\n');
+         while (getchar() != '\n')
+            ;
          continue;
       }
 
