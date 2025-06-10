@@ -7,8 +7,6 @@
 #include <ncurses.h>
 #include "EasyPIO.h"
 
-extern void delay_asm(int time);
-extern void menu_asm(void);
 extern void formula1(void);
 extern void colision_asm(void);
 
