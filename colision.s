@@ -4,13 +4,11 @@
 colision_asm:
     PUSH    {R4-R7, LR}
     
-    // Initialize registers for LED pattern
-    MOV     R4, #0x81    // Start with outer LEDs
-    MOV     R5, #0xC3    // Next pattern
-    MOV     R6, #0xE7    // Next pattern
-    MOV     R7, #0xFF    // Full pattern
+    MOV     R4, #0x81    
+    MOV     R5, #0xC3    
+    MOV     R6, #0xE7
+    MOV     R7, #0xFF    
     
-    // Stack to center
     MOV     R0, R4
     BL      disp_binary
     BL      delay_asm

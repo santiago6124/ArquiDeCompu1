@@ -2,20 +2,16 @@
 menu_asm:
     PUSH    {R4-R7, LR}
     
-    // Print menu options
     LDR     R0, =menu_str
     BL      printf
     
-    // Read user input
     LDR     R0, =input_format
     LDR     R1, =input_buffer
     BL      scanf
     
-    // Load input value
     LDR     R0, =input_buffer
     LDR     R0, [R0]
     
-    // Switch-case structure
     CMP     R0, #1
     BEQ     case1
     CMP     R0, #2

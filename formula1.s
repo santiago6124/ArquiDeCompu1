@@ -1,4 +1,3 @@
-//FUNCION FORMULA 1 
 .text
 .global disp_binary
 .global delay
